@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { FaUsers, FaChalkboardTeacher, FaGraduationCap } from 'react-icons/fa';
+import logo from '../assets/images/logo.svg';
+
 import topper1 from '../assets/images/student1.jpg';
 import topper2 from '../assets/images/student2.jpg';
 import topper3 from '../assets/images/student3.jpg';
@@ -9,6 +11,8 @@ import topper3 from '../assets/images/student3.jpg';
 import class1 from '../assets/images/classsroom1.jpg';
 import class2 from '../assets/images/classsroom2.jpg';
 import class3 from '../assets/images/classsroom3.jpg';
+import Footer from './Footer';
+import NavigationBar from './NavigationBar';
 
 const Blog = () => {
   const topStudents = [
@@ -37,18 +41,7 @@ const Blog = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Header */}
-      <header className="flex justify-between items-center p-4 bg-gray-800 shadow-lg">
-        <div className="flex items-center">
-          <img src="/assets/images/logo.svg" alt="Talent Engaged Logo" className="h-10" />
-          <span className="text-xl font-bold ml-2">Talent Engaged</span>
-        </div>
-        <div className="flex space-x-4">
-          <Link to="/admissions" className="bg-gray-700 text-gray-300 px-3 py-2 rounded-md hover:bg-gray-600 transition duration-300">Admissions</Link>
-          <Link to="/blog" className="bg-gray-700 text-gray-300 px-3 py-2 rounded-md hover:bg-gray-600 transition duration-300">Blog</Link>
-          <Link to="/login" className="bg-gray-700 text-gray-300 px-3 py-2 rounded-md hover:bg-gray-600 transition duration-300">Login</Link>
-          <button className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-500 transition duration-300">Get Started</button>
-        </div>
-      </header>
+      <NavigationBar/>
 
       {/* Hero Section */}
       <section className="px-8 py-16 fade-in">
@@ -135,24 +128,7 @@ const Blog = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 py-16 bg-gray-800">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-lg mb-4 md:mb-0">
-            <p>&copy; 2023 Talent Engaged</p>
-          </div>
-          <div className="flex flex-wrap">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-lg mr-4 mb-2 hover:text-purple-500 transition duration-300">
-              <FaFacebook className="inline-block mr-1" /> Facebook
-            </a>
-            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="text-lg mr-4 mb-2 hover:text-purple-500 transition duration-300">
-              <FaTwitter className="inline-block mr-1" /> Twitter
-            </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-lg mr-4 mb-2 hover:text-purple-500 transition duration-300">
-              <FaInstagram className="inline-block mr-1" /> Instagram
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };

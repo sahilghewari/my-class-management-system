@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import TeacherDashboard from './pages/TeacherDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import Admission from './pages/admission';
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <Route path="/ai-page" element={<Ai />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admission" element={<Admission/>}/>
+        <Route path="/payment" element={<Payment/>}/>
+
         
         {/* Protected Route for Teacher Dashboard */}
         <Route
