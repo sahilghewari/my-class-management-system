@@ -74,7 +74,7 @@ const StudyMaterialPage = () => {
       {/* Main Content */}
       <main className="ml-64 flex-1 flex flex-col p-8">
         {/* Scrollable Generated Notes Section */}
-        <div className="flex-1 overflow-y-auto bg-gray-800 bg-opacity-80 rounded-xl shadow-lg p-6">
+        <div className="flex-1 overflow-hidden bg-gray-800 bg-opacity-80 rounded-xl shadow-lg p-6">
           <h3 className="text-xl font-semibold mb-4">Generated Notes</h3>
 
           {/* Loader while generating notes */}
