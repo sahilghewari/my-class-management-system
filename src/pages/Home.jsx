@@ -108,13 +108,7 @@ const Home = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="px-8 py-16 bg-gray-800 rounded-lg">
-        <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
-        <p className="text-lg mb-6">Join our vibrant community of learners and educators.</p>
-        <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l hover:from-purple-600 hover:to-blue-500 neon-glow">
-          Get Started
-        </button>
-      </section>
+      
 
       {/* Footer */}
       <Footer/>
