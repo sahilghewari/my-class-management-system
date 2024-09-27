@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import NavigationBar from './NavigationBar';
+import Footer from './Footer';
 
 // Import your images
 import logo from '../assets/images/logo.svg';
@@ -36,30 +38,7 @@ const Home = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Header */}
-      <header className="flex justify-between items-center p-4 bg-gray-800 shadow-lg">
-        <div className="flex items-center">
-          <img src={logo} alt="Talent Engaged Logo" className="h-10" />
-          <span className="text-xl font-bold ml-2">Talent Engaged</span>
-        </div>
-        <div className="flex space-x-2">
-          <button className="bg-gradient-to-r from-gray-300 to-gray-500 text-black px-3 py-2 rounded-md hover:from-gray-400 hover:to-gray-600">
-            Menu
-          </button>
-          <button className="bg-gradient-to-r from-gray-300 to-gray-500 text-black px-3 py-2 rounded-md hover:from-gray-400 hover:to-gray-600">
-            Admissions
-          </button>
-          <Link to="/blog">
-            <button className="bg-gradient-to-r from-gray-300 to-gray-500 text-black px-3 py-2 rounded-md hover:from-gray-400 hover:to-gray-600">
-              Blog
-            </button>
-          </Link>
-          <Link to="/ai">
-            <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l hover:from-purple-600 hover:to-blue-500 neon-glow">
-              Get Started
-            </button>
-          </Link>
-        </div>
-      </header>
+      <NavigationBar />
 
       {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-between px-8 py-16">
@@ -138,39 +117,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-8 py-16 bg-gray-800">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-lg mb-4 md:mb-0">
-            <p>&copy; 2023 Talent Engaged</p>
-          </div>
-          <div className="flex flex-wrap">
-            <a 
-              href="https://www.facebook.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-lg mr-4 mb-2 hover:text-purple-500"
-            >
-              <FaFacebook className="inline-block mr-1" /> Facebook
-            </a>
-            <a 
-              href="https://www.twitter.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-lg mr-4 mb-2 hover:text-purple-500"
-            >
-              <FaTwitter className="inline-block mr-1" /> Twitter
-            </a>
-            <a 
-              href="https://www.instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-lg mr-4 mb-2 hover:text-purple-500"
-            >
-              <FaInstagram className="inline-block mr-1" /> Instagram
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };
