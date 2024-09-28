@@ -1,0 +1,33 @@
+[
+    {
+      "title": "Introduction to Programming",
+      "description": "Learn the basics of programming using Python. This course covers fundamental concepts such as variables, control structures, functions, and data types.",
+      "teacher": "John Doe",
+      "fees": 150
+    },
+    {
+      "title": "Advanced Web Development",
+      "description": "Dive deep into modern web development with React and Node.js. This course will cover front-end and back-end development techniques.",
+      "teacher": "Jane Smith",
+      "fees": 200
+    },
+    {
+      "title": "Data Science Essentials",
+      "description": "An introduction to data science concepts, including data analysis, visualization, and machine learning with Python and R.",
+      "teacher": "Emily Johnson",
+      "fees": 250
+    },
+    {
+      "title": "Graphic Design for Beginners",
+      "description": "Explore the principles of graphic design using tools like Adobe Photoshop and Illustrator. Ideal for beginners.",
+      "teacher": "Michael Brown",
+      "fees": 180
+    },
+    {
+      "title": "Digital Marketing Strategies",
+      "description": "Learn effective digital marketing strategies, including SEO, social media marketing, and content creation.",
+      "teacher": "Sarah Wilson",
+      "fees": 220
+    }
+  ]
+  

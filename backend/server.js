@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
-const app = express();
+const courseRoutes = require('./routes/courses'); // Adjust the path as necessary
 
 dotenv.config();  // Load environment variables
+
+const app = express();
 
 app.use(cors());  // Enable CORS for frontend-backend communication
 app.use(express.json());  // Parse JSON bodies
@@ -21,12 +23,15 @@ const connectDB = async () => {
   }
 };
 
+// Connect to MongoDB before starting the server
+connectDB();
+
 // Routes
 app.use('/api/auth', authRoutes);  // Register auth routes
+app.use('/api/courses', courseRoutes); // Add this line to use your routes
 
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  connectDB();  // Connect to MongoDB when server starts
 });
