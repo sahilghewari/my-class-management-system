@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.9.4",
     "@google/generative-ai": "^0.19.0",
     "@material-tailwind/react": "^2.1.10",
     "@shadcn/ui": "^0.0.4",

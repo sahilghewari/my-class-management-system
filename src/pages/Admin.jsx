@@ -4,8 +4,11 @@ import { FaChartBar, FaUserCog, FaBookOpen, FaCalendarAlt, FaEnvelope, FaDollarS
 
 const AdminDashboard = () => {
   const [courses, setCourses] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [newCourse, setNewCourse] = useState({ title: '', description: '', teacher: '', fees: '' });
+  const [newNotification, setNewNotification] = useState({ message: '' }); // Add adminId accordingly
   const [editCourse, setEditCourse] = useState(null); // For editing a course
+  const [editNotification, setEditNotification] = useState(null); // For editing a notification
 
   // Fetch Courses from backend
   useEffect(() => {
@@ -24,7 +27,23 @@ const AdminDashboard = () => {
       }
     };
 
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/notifications');
+        if (Array.isArray(response.data)) {
+          setNotifications(response.data);
+        } else {
+          setNotifications([]);
+          console.error('Notifications data is not an array:', response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+        setNotifications([]);
+      }
+    };
+
     fetchCourses();
+    fetchNotifications();
   }, []);
 
   // Add a new course
@@ -63,6 +82,29 @@ const AdminDashboard = () => {
     }
   };
 
+  // Add a new notification
+  const addNotification = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/notifications', newNotification);
+      if (response.data && response.data._id) {
+        setNotifications([...notifications, response.data]);
+        setNewNotification({ message: '' }); // Clear form
+      }
+    } catch (error) {
+      console.error('Error adding notification:', error);
+    }
+  };
+
+  // Delete notification
+  const deleteNotification = async (notificationId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/notifications/${notificationId}`);
+      setNotifications(notifications.filter(notification => notification._id !== notificationId));
+    } catch (error) {
+      console.error('Error deleting notification:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
       {/* Sidebar */}
@@ -73,9 +115,9 @@ const AdminDashboard = () => {
             <FaBookOpen className="text-xl" />
             <span>Course Management</span>
           </a>
-          <a href="#user-management" className="flex items-center space-x-2 hover:text-blue-500 neon-glow">
-            <FaUserCog className="text-xl" />
-            <span>User Management</span>
+          <a href="#notification-management" className="flex items-center space-x-2 hover:text-blue-500 neon-glow">
+            <FaEnvelope className="text-xl" />
+            <span>Notification Management</span>
           </a>
         </nav>
       </aside>
@@ -175,13 +217,13 @@ const AdminDashboard = () => {
                       className="bg-yellow-600 py-2 px-4 rounded hover:bg-yellow-500 mr-2"
                       onClick={() => setEditCourse(course)}
                     >
-                      <FaEdit /> Edit
+                      Edit
                     </button>
                     <button
                       className="bg-red-600 py-2 px-4 rounded hover:bg-red-500"
                       onClick={() => deleteCourse(course._id)}
                     >
-                      <FaTrash /> Delete
+                      Delete
                     </button>
                   </>
                 )}
@@ -190,8 +232,44 @@ const AdminDashboard = () => {
           </div>
         </section>
 
-        {/* User Management Section */}
-        {/* Add similar implementation for User Management as needed */}
+        {/* Notification Management Section */}
+        <section id="notification-management">
+          <h3 className="text-2xl font-semibold mb-6 neon-text">Notification Management</h3>
+
+          {/* Add New Notification Form */}
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-6 neon-border">
+            <h4 className="text-xl font-bold mb-4">Add New Notification</h4>
+            <input
+              type="text"
+              className="w-full p-2 mb-4 rounded bg-gray-700 text-white"
+              placeholder="Notification Message"
+              value={newNotification.message}
+              onChange={(e) => setNewNotification({ ...newNotification, message: e.target.value })}
+            />
+            
+            <button
+              className="bg-blue-600 py-2 px-4 rounded hover:bg-blue-500 transition"
+              onClick={addNotification}
+            >
+              Add Notification
+            </button>
+          </div>
+
+          {/* Notifications List */}
+          <div className="space-y-4">
+            {notifications.map(notification => (
+              <div key={notification._id} className="bg-gray-700 p-4 rounded-lg flex justify-between items-center neon-glow">
+                <span>{notification.message}</span>
+                <button
+                  className="bg-red-600 py-2 px-4 rounded hover:bg-red-500"
+                  onClick={() => deleteNotification(notification._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

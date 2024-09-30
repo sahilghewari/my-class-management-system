@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courses'); // Adjust the path as necessary
+const notificationRoutes = require('./routes/Notifications');
+
 
 dotenv.config();  // Load environment variables
 
@@ -29,6 +31,8 @@ connectDB();
 // Routes
 app.use('/api/auth', authRoutes);  // Register auth routes
 app.use('/api/courses', courseRoutes); // Add this line to use your routes
+app.use('/api/notifications', notificationRoutes);
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

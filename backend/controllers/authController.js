@@ -8,7 +8,7 @@ const generateToken = (id) => {
 
 // Signup logic
 exports.signup = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password } = req.body;
   
   try {
     // Check if user already exists
@@ -17,8 +17,8 @@ exports.signup = async (req, res) => {
       return res.status(400).json({ success: false, message: 'User already exists' });
     }
 
-    // Create new user
-    const user = await User.create({ name, email, password, role });
+    // Create new user without role
+    const user = await User.create({ name, email, password });
 
     // Generate JWT token
     const token = generateToken(user._id);
@@ -26,7 +26,7 @@ exports.signup = async (req, res) => {
     res.status(201).json({
       success: true,
       token,
-      user: { id: user._id, name: user.name, role: user.role },
+      user: { id: user._id, name: user.name },
     });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error' });
@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
     res.status(200).json({
       success: true,
       token,
-      user: { id: user._id, name: user.name, role: user.role },
+      user: { id: user._id, name: user.name },
     });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error' });

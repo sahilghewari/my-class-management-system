@@ -16,4 +16,32 @@
                 0 0 100px rgba(255, 255, 255, 0.4);
   }
   
+
+/* Neon Border Effect */
+.neon-border {
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  box-shadow: 
+    0 0 5px rgba(0, 255, 255, 0.6),
+    0 0 10px rgba(0, 255, 255, 0.4),
+    0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Background Animation */
+@keyframes pulse {
+  0% {
+    background-color: rgba(0, 255, 255, 0.1);
+  }
+  50% {
+    background-color: rgba(0, 255, 255, 0.2);
+  }
+  100% {
+    background-color: rgba(0, 255, 255, 0.1);
+  }
+}
+
+/* Applying the animation to notifications */
+.notification-item {
+  animation: pulse 1.5s infinite;
+}
+
   

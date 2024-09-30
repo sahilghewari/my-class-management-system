@@ -1,16 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const Notification = require('../models/Notification');
+const Notification = require('../models/Notification'); // Make sure to create a Notification model
 
-// Get notifications for the teacher
-router.get('/', async (req, res) => {
-  const teacherId = req.user.id; // Assuming you have user authentication
-
+// Create a new notification
+router.post('/', async (req, res) => {
   try {
-    const notifications = await Notification.find({ teacherId });
-    res.json(notifications);
+    const notification = new Notification(req.body);
+    await notification.save();
+    res.status(201).send(notification);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching notifications', error });
+    res.status(400).send(error);
+  }
+});
+
+// Get all notifications
+router.get('/', async (req, res) => {
+  try {
+    const notifications = await Notification.find();
+    res.send(notifications);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Delete a notification
+router.delete('/:id', async (req, res) => {
+  try {
+    const notification = await Notification.findByIdAndDelete(req.params.id);
+    if (!notification) {
+      return res.status(404).send();
+    }
+    res.send(notification);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 

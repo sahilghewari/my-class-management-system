@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { SignUp } from '@clerk/clerk-react';
+
 
 // Import your assets
 import logo from '../assets/images/logo.svg'; // Update with your logo path
@@ -11,7 +13,6 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'student', // Default role
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -26,6 +27,18 @@ const Signup = () => {
     setError('');
 
     // Basic client-side validation
+    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/; // At least one number, one special character, and minimum 8 characters
+
+    if (!formData.password) {
+      setError("Password can't be blank");
+      return;
+    }
+
+    if (!passwordPattern.test(formData.password)) {
+      setError("Password must contain at least one number, one special character, and be at least 8 characters long");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match");
       return;
@@ -36,13 +49,10 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        role: formData.role, // Include the role in the request
       });
 
       if (response.data.success) {
-        // Store the role in local storage
-        localStorage.setItem('role', formData.role);
-        // Redirect to the same page or another page
+        // Redirect to the desired page
         navigate('/'); // Redirect to the desired page
       } else {
         setError(response.data.message);
@@ -57,6 +67,8 @@ const Signup = () => {
   };
 
   return (
+
+    
     <div 
       className="min-h-screen flex items-center justify-center"
       style={{
@@ -64,7 +76,7 @@ const Signup = () => {
         backgroundSize: '400% 400%', 
         animation: 'gradientAnimation 15s ease infinite',
       }}
-    >
+    > 
       {/* 3D Card Container */}
       <div 
         className="bg-gray-800 p-8 rounded-lg shadow-lg border-2 border-purple-500 neon-border max-w-md w-full transform scale-95 opacity-0 animate-fadeInUp"
@@ -148,20 +160,6 @@ const Signup = () => {
               placeholder="••••••••"
               required
             />
-          </div>
-
-          {/* Role Selection */}
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full p-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-            >
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-            </select>
           </div>
 
           {/* 3D Button with Hover Effect */}

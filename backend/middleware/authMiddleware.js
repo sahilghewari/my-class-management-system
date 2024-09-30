@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 // Authentication Middleware
 const authMiddleware = (req, res, next) => {
-  // Corrected header extraction
   const authHeader = req.headers['authorization'];
   
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -19,19 +18,7 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-// Role Verification Middleware
-const verifyRole = (role) => {
-  return (req, res, next) => {
-    const userRole = req.user.role; // Ensure the role is attached to the user
-    if (userRole !== role) {
-      return res.status(403).json({ success: false, message: 'Access denied. Insufficient permissions.' });
-    }
-    next();
-  };
-};
-
-// Export both middlewares
+// Export the authentication middleware
 module.exports = {
   authMiddleware,
-  verifyRole,
 };

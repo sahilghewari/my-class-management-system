@@ -6,6 +6,8 @@ import Blog from './pages/Blog';
 import Ai from './pages/Ai';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+
 
 import Admission from './pages/Admission';
 import Payment from './pages/Payment';
@@ -13,6 +15,7 @@ import Admin from './pages/Admin';
 
 function App() {
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />

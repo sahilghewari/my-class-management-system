@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 import Footer from './Footer';
+import axios from 'axios';
+
 
 // Import your images
 import logo from '../assets/images/logo.svg';
@@ -13,7 +15,20 @@ import feature3 from '../assets/images/feature3.jpg';
 
 const Home = () => {
   const [currentFeature, setCurrentFeature] = useState(0); 
+  const [notifications, setNotifications] = useState([]);
 
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/notifications');
+        setNotifications(response.data);
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
   const features = [
     { 
       title: 'Explore All Benefits of Talent Engaged',
@@ -34,6 +49,16 @@ const Home = () => {
       tags: ['Opportunities'],
     },
   ];
+
+  // Sample notifications - this should be replaced with a fetch from your backend
+  useEffect(() => {
+    const sampleNotifications = [
+      { id: 1, message: 'New course added: Introduction to AI!', timestamp: '2024-09-28' },
+      { id: 2, message: 'Webinar on Education Technology next week.', timestamp: '2024-09-27' },
+      { id: 3, message: 'Remember to submit your assignments by Friday!', timestamp: '2024-09-26' },
+    ];
+    setNotifications(sampleNotifications);
+  }, []);
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
@@ -73,6 +98,27 @@ const Home = () => {
           </button>
         </Link>
       </section>
+     
+           {/* notifications */}
+
+     
+      <section className="px-8 py-16">
+  <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-blue-400 bg-clip-text text-transparent neon-glow">
+    Notifications
+  </h2>
+  <div className="bg-gray-800 p-4 rounded-lg shadow-lg border-2 border-purple-500 neon-border transition-transform transform hover:scale-105">
+    {notifications.length > 0 ? (
+      notifications.map(notification => (
+        <div key={notification.id} className="border-b border-gray-700 py-2 hover:bg-gray-700 transition-colors duration-300">
+          <p className="text-sm">{notification.message}</p>
+          <p className="text-xs text-gray-400">{notification.timestamp}</p>
+        </div>
+      ))
+    ) : (
+      <p className="text-sm">No notifications available.</p>
+    )}
+  </div>
+</section>
 
       {/* Features Section */}
       <section className="px-8 py-16">
@@ -107,11 +153,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      
-
+      {/* Notifications Section */}
+     
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 };
