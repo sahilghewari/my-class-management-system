@@ -11,20 +11,23 @@ import {
   Button,
 } from "@material-tailwind/react";
 import CountUp from 'react-countup';
+import s from '../assets/images/nigga2.jpeg'; 
+import p from '../assets/images/Nigga.png';
+import d from '../assets/images/student3.jpg';
 
 const Blog = () => {
   const faculties = [
     {
       name: "Sahil Sir",
-      image: "sampleteacher", 
+      image: d, 
     },
     {
-      name: "Pavan Sir",
-      image: "", 
+      name: "Nigga Sethu",
+      image: p, 
     },
     {
-      name: "Dikshant Sir",
-      image: "", 
+      name: "Miss.Jagdish Nigga Sethu",
+      image: s, 
     },
   ];
 
@@ -40,6 +43,29 @@ const Blog = () => {
     {
       value: "60",
       label: "Years of Experience",
+    },
+  ];
+
+  const keyFeatures = [
+    {
+      title: "Clear Concepts",
+      description: "In-depth explanations to ensure complete understanding.",
+      icon: "https://i.postimg.cc/SxT4J38m/images-removebg-preview.png",
+    },
+    {
+      title: "Expert Guidance",
+      description: "Learn from industry-leading professionals with extensive experience.",
+      icon: "https://i.postimg.cc/9f91jLYM/icon2.png", 
+    },
+    {
+      title: "Interactive Learning",
+      description: "Engaging sessions that promote active participation.",
+      icon: "https://i.postimg.cc/4yf1Vsk7/self-learning.png", 
+    },
+    {
+      title: "Flexible Scheduling",
+      description: "Choose your own study times to fit your busy lifestyle.",
+      icon: "https://i.postimg.cc/c45cgpDC/schedule.png", 
     },
   ];
 
@@ -84,17 +110,17 @@ const Blog = () => {
             )}
           >
             <img
-              src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+              src="https://i.postimg.cc/dDMtgtsD/feliphe-schiarolli-hes6n-UC1-MVc-unsplash.jpg"
               alt="image 1"
               className="h-full w-full object-cover neon-border"
             />
             <img
-              src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+              src="https://i.postimg.cc/vmPnk9pB/kenny-eliason-z-FSo6bn-ZJTw-unsplash.jpg"
               alt="image 2"
               className="h-full w-full object-cover neon-border"
             />
             <img
-              src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+              src="https://i.postimg.cc/K8xgYJbj/annie-spratt-Qckxruozj-Rg-unsplash.jpg"
               alt="image 3"
               className="h-full w-full object-cover neon-border"
             />
@@ -131,26 +157,26 @@ const Blog = () => {
 
       {/* Key Features section */}
       <div className="container mx-auto p-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-8 text-white">--- Key Features ---</h1>
-          <div className="flex flex-wrap justify-center gap-x-24 gap-y-12">
-            {[...Array(4)].map((_, index) => (
-              <div 
-                key={index} 
-                className="rounded-xl shadow-lg p-4 h-64 w-60 flex items-center flex-col justify-center bg-gradient-to-r  from-blue-500 to-purple-600 text-white border border-[#14F195] transition-transform duration-300 hover:scale-105 hover:bg-[#333333] hover:border-[#00FFEA] neon-glow"
-              >
-                <img 
-                  className="w-16 h-16 mb-4" 
-                  src="https://i.postimg.cc/SxT4J38m/images-removebg-preview.png" 
-                  alt="Feature Icon" 
-                />
-                <h2 className="text-lg font-semibold">CLEAR CONCEPTS</h2>
-              </div>
-            ))}
-          </div>
+  <div className="text-center">
+    <h1 className="text-2xl font-bold mb-8 text-white">--- Key Features ---</h1>
+    <div className="flex flex-wrap justify-center gap-x-24 gap-y-12">
+      {keyFeatures.map((feature, index) => (
+        <div 
+          key={index} 
+          className="rounded-xl shadow-lg p-4 h-64 w-60 flex items-center flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-black border border-[#14F195] transition-transform duration-300 hover:scale-105 hover:bg-[#333333] hover:border-[#00FFEA] neon-glow"
+        >
+          <img 
+            className="w-16 h-16 mb-4" 
+            src={feature.icon} 
+            alt="Feature Icon" 
+          />
+          <h2 className="text-lg font-semibold">{feature.title}</h2>
+          <p className="text-center mt-2">{feature.description}</p>
         </div>
-      </div>
-
+      ))}
+    </div>
+  </div>
+</div>
       {/* Stats section */}
       <div ref={statsRef} className="bg-[#1a1f3a] text-[rgb(211,211,211)] py-8 neon-box">
         <div className="max-w-7xl mx-auto flex justify-around">
