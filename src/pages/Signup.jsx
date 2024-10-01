@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { SignUp } from '@clerk/clerk-react';
-
-
-// Import your assets
-import logo from '../assets/images/logo.svg'; // Update with your logo path
+import logo from '../assets/images/logo.svg';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -26,8 +22,7 @@ const Signup = () => {
     e.preventDefault();
     setError('');
 
-    // Basic client-side validation
-    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/; // At least one number, one special character, and minimum 8 characters
+    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
 
     if (!formData.password) {
       setError("Password can't be blank");
@@ -52,8 +47,7 @@ const Signup = () => {
       });
 
       if (response.data.success) {
-        // Redirect to the desired page
-        navigate('/'); // Redirect to the desired page
+        navigate('/');
       } else {
         setError(response.data.message);
       }
@@ -67,121 +61,104 @@ const Signup = () => {
   };
 
   return (
-
-    
-    <div 
-      className="min-h-screen flex items-center justify-center"
+    <div
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black"
       style={{
-        background: 'linear-gradient(135deg, #001f3f, #001844, #09173b, #081135)', // Sci-fi gradient
-        backgroundSize: '400% 400%', 
-        animation: 'gradientAnimation 15s ease infinite',
+        backgroundSize: '400% 400%',
+        animation: 'gradientAnimation 20s ease infinite',
       }}
-    > 
-      {/* 3D Card Container */}
-      <div 
-        className="bg-gray-800 p-8 rounded-lg shadow-lg border-2 border-purple-500 neon-border max-w-md w-full transform scale-95 opacity-0 animate-fadeInUp"
-      >
-        {/* Logo */}
+    >
+      {/* Container with neon effects and refined borders */}
+      <div className="bg-gray-900 p-10 rounded-lg shadow-lg border-2 border-cyan-400 neon-border max-w-lg w-full transform scale-95 opacity-0 animate-fadeInUp">
         <div className="flex justify-center mb-6">
-          <img src={logo} alt="Talent Engaged Logo" className="h-12 animate-pulse" />
+          <img src={logo} alt="Talent Engaged Logo" className="h-14 animate-pulse neon-glow" />
         </div>
 
-        <h2 className="text-3xl text-white font-bold text-center mb-4">
-          Create an Account
+        <h2 className="text-4xl text-white font-semibold text-center mb-6">
+          Join Talent Engaged
         </h2>
-        <p className="text-gray-400 text-center mb-6">
-          Join Talent Engaged and start learning today!
+        <p className="text-gray-400 text-center mb-8">
+          Create an account and start your journey with us.
         </p>
 
-        {/* Error Message */}
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit}>
-          {/* 3D Input Fields */}
-          <div className="mb-4 transform transition-transform duration-500 hover:scale-105">
-            <label className="block text-gray-300 mb-2" htmlFor="name">
-              Full Name
-            </label>
+          {/* Animated Input Fields */}
+          <div className="mb-5 relative">
+            <label className="block text-gray-300 mb-2" htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full p-3 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transform transition-transform duration-300 hover:scale-105"
               placeholder="Your Full Name"
               required
             />
           </div>
 
-          <div className="mb-4 transform transition-transform duration-500 hover:scale-105">
-            <label className="block text-gray-300 mb-2" htmlFor="email">
-              Email
-            </label>
+          <div className="mb-5 relative">
+            <label className="block text-gray-300 mb-2" htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="your-email@example.com"
+              className="w-full p-3 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transform transition-transform duration-300 hover:scale-105"
+              placeholder="you@example.com"
               required
             />
           </div>
 
-          <div className="mb-4 transform transition-transform duration-500 hover:scale-105">
-            <label className="block text-gray-300 mb-2" htmlFor="password">
-              Password
-            </label>
+          <div className="mb-5 relative">
+            <label className="block text-gray-300 mb-2" htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full p-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="••••••••"
+              className="w-full p-3 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transform transition-transform duration-300 hover:scale-105"
+              placeholder="Password"
               required
             />
           </div>
 
-          <div className="mb-4 transform transition-transform duration-500 hover:scale-105">
-            <label className="block text-gray-300 mb-2" htmlFor="confirm-password">
-              Confirm Password
-            </label>
+          <div className="mb-5 relative">
+            <label className="block text-gray-300 mb-2" htmlFor="confirm-password">Confirm Password</label>
             <input
               type="password"
               id="confirm-password"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="w-full p-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="••••••••"
+              className="w-full p-3 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transform transition-transform duration-300 hover:scale-105"
+              placeholder="Confirm Password"
               required
             />
           </div>
 
-          {/* 3D Button with Hover Effect */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 rounded-md hover:shadow-lg hover:scale-105 transform transition-all duration-500 neon-glow"
+            className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 rounded-md hover:shadow-xl hover:scale-105 transform transition-all duration-300 neon-glow"
           >
-            Sign Up
+            Create Account
           </button>
         </form>
 
-        <div className="mt-4 text-center">
+        <div className="mt-6 text-center">
           <p className="text-gray-400">
             Already have an account?{' '}
-            <Link to="/login" className="text-purple-500 hover:underline">
+            <Link to="/login" className="text-cyan-400 hover:underline">
               Log In
             </Link>
           </p>
         </div>
       </div>
 
-      {/* Add animations for 3D effect */}
       <style>{`
         @keyframes gradientAnimation {
           0% { background-position: 0% 50%; }
@@ -205,11 +182,11 @@ const Signup = () => {
         }
 
         .neon-border {
-          box-shadow: 0 0 15px rgba(138, 43, 226, 0.7), 0 0 30px rgba(138, 43, 226, 0.5);
+          box-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 0 0 40px rgba(0, 255, 255, 0.5);
         }
 
         .neon-glow {
-          box-shadow: 0 0 10px rgba(138, 43, 226, 0.8), 0 0 20px rgba(138, 43, 226, 0.5);
+          box-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
         }
 
         .animate-pulse {
@@ -217,15 +194,9 @@ const Signup = () => {
         }
 
         @keyframes pulse {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.05);
-          }
-          100% {
-            transform: scale(1);
-          }
+          0% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+          100% { transform: scale(1); }
         }
       `}</style>
     </div>

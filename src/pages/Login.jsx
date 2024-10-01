@@ -30,15 +30,9 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        // Store the role in local storage
-        localStorage.setItem('role', response.data.user.role); // Store user role from response
-        
-        // Redirect based on the user role
-        if (response.data.user.role === 'teacher') {
-          navigate('/teacher-dashboard'); // Redirect to Teacher Dashboard
-        } else {
-          navigate('/'); // Redirect to the home page for students
-        }
+        // Store the token in local storage
+        localStorage.setItem('token', response.data.token); // Store user token from response
+        navigate('/');
       } else {
         setError(response.data.message); // Set error message from response
       }

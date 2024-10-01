@@ -30,15 +30,11 @@ const NavigationBar = () => {
             </button>
           </Link>
 
-          {/* Merge SignInButton with "Get Started" */}
-          <SignedOut>
-            <SignInButton>
+          <Link to="/signup">
               <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l hover:from-purple-600 hover:to-blue-500 neon-glow">
                 Get Started
               </button>
-            </SignInButton>
-          </SignedOut>
-
+              </Link>
           {/* Show UserButton when SignedIn */}
           <SignedIn>
             <UserButton className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l hover:from-purple-600 hover:to-blue-500 neon-glow" />
