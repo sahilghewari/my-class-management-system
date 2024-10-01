@@ -30,9 +30,10 @@ const Login = () => {
       });
 
       if (response.data.success) {
-        // Store the token in local storage
+        localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user details
         localStorage.setItem('token', response.data.token); // Store user token from response
-        navigate('/');
+        localStorage.setItem('isAuthenticated', 'true'); // Set authenticated flag
+        navigate('/'); // Redirect to home page
       } else {
         setError(response.data.message); // Set error message from response
       }
@@ -46,14 +47,13 @@ const Login = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center"
-      style={{
-        background: 'linear-gradient(135deg, #001f3f, #001844, #09173b, #081135)', // Sci-fi gradient
-        backgroundSize: '400% 400%', 
-        animation: 'gradientAnimation 15s ease infinite',
-      }}
-    >
+    <div
+    className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black"
+    style={{
+      backgroundSize: '400% 400%',
+      animation: 'gradientAnimation 20s ease infinite',
+    }}
+  >
       {/* 3D Card Container */}
       <div 
         className="bg-gray-800 p-8 rounded-lg shadow-lg border-2 border-purple-500 neon-border max-w-md w-full transform scale-95 opacity-0 animate-fadeInUp"
@@ -108,7 +108,7 @@ const Login = () => {
           {/* 3D Button with Hover Effect */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 rounded-md hover:shadow-lg hover:scale-105 transform transition-all duration-500 neon-glow"
+            className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 rounded-md hover:shadow-xl hover:scale-105 transform transition-all duration-300 neon-glow"
           >
             Log In
           </button>
@@ -117,7 +117,7 @@ const Login = () => {
         <div className="mt-4 text-center">
           <p className="text-gray-400">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-purple-500 hover:underline">
+            <Link to="/signup" className="text-cyan-400 hover:underline">
               Sign Up
             </Link>
           </p>
@@ -148,11 +148,11 @@ const Login = () => {
         }
 
         .neon-border {
-          box-shadow: 0 0 15px rgba(138, 43, 226, 0.7), 0 0 30px rgba(138, 43, 226, 0.5);
+          box-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 0 0 40px rgba(0, 255, 255, 0.5);
         }
 
         .neon-glow {
-          box-shadow: 0 0 10px rgba(138, 43, 226, 0.8), 0 0 20px rgba(138, 43, 226, 0.5);
+          box-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
         }
 
         .animate-pulse {

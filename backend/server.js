@@ -5,14 +5,18 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courses'); // Adjust the path as necessary
 const notificationRoutes = require('./routes/Notifications');
+const bodyParser = require('body-parser');
 
 
 dotenv.config();  // Load environment variables
 
 const app = express();
 
+
 app.use(cors());  // Enable CORS for frontend-backend communication
 app.use(express.json());  // Parse JSON bodies
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB Connection
 const connectDB = async () => {

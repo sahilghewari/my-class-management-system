@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import NavigationBar from './NavigationBar';
 import Footer from './Footer';
 import axios from 'axios';
-
 
 // Import your images
 import logo from '../assets/images/logo.svg';
@@ -16,8 +15,13 @@ import feature3 from '../assets/images/feature3.jpg';
 const Home = () => {
   const [currentFeature, setCurrentFeature] = useState(0); 
   const [notifications, setNotifications] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Authentication state
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); // Replace with your actual token retrieval method
+    setIsAuthenticated(!!token);
+
     const fetchNotifications = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/notifications');
@@ -29,6 +33,7 @@ const Home = () => {
 
     fetchNotifications();
   }, []);
+
   const features = [
     { 
       title: 'Explore All Benefits of Talent Engaged',
@@ -59,6 +64,15 @@ const Home = () => {
     ];
     setNotifications(sampleNotifications);
   }, []);
+
+  const handleAIButtonClick = () => {
+    if (isAuthenticated) {
+      navigate('/ai-page'); // Redirect to AI page
+    } else {
+      alert("Please login To use AI")
+      navigate('/login'); // Redirect to login page if not authenticated
+    }
+  };
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
@@ -92,33 +106,32 @@ const Home = () => {
 
       {/* Sci-Fi Futuristic AI Button */}
       <section className="px-8 py-1 flex justify-center">
-        <Link to="/ai-page">
-          <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xl font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-purple-600/50 hover:scale-110 transition-transform neon-glow">
-            <span className="tracking-wider uppercase">Explore AI Assistant</span>
-          </button>
-        </Link>
+        <button 
+          onClick={handleAIButtonClick} 
+          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xl font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-purple-600/50 hover:scale-110 transition-transform neon-glow"
+        >
+          <span className="tracking-wider uppercase">Explore AI Assistant</span>
+        </button>
       </section>
      
-           {/* notifications */}
-
-     
+      {/* Notifications Section */}
       <section className="px-8 py-16">
-  <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-blue-400 bg-clip-text text-transparent neon-glow">
-    Notifications
-  </h2>
-  <div className="bg-gray-800 p-4 rounded-lg shadow-lg border-2 border-purple-500 neon-border transition-transform transform hover:scale-105">
-    {notifications.length > 0 ? (
-      notifications.map(notification => (
-        <div key={notification.id} className="border-b border-gray-700 py-2 hover:bg-gray-700 transition-colors duration-300">
-          <p className="text-sm">{notification.message}</p>
-          <p className="text-xs text-gray-400">{notification.timestamp}</p>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-blue-400 bg-clip-text text-transparent neon-glow">
+          Notifications
+        </h2>
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg border-2 border-purple-500 neon-border transition-transform transform hover:scale-105">
+          {notifications.length > 0 ? (
+            notifications.map(notification => (
+              <div key={notification.id} className="border-b border-gray-700 py-2 hover:bg-gray-700 transition-colors duration-300">
+                <p className="text-sm">{notification.message}</p>
+                <p className="text-xs text-gray-400">{notification.timestamp}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm">No notifications available.</p>
+          )}
         </div>
-      ))
-    ) : (
-      <p className="text-sm">No notifications available.</p>
-    )}
-  </div>
-</section>
+      </section>
 
       {/* Features Section */}
       <section className="px-8 py-16">
@@ -153,8 +166,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Notifications Section */}
-     
       {/* Footer */}
       <Footer />
     </div>
