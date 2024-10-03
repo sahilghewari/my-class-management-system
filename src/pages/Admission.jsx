@@ -1,3 +1,5 @@
+// src/components/AdmissionsPage.js
+
 import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import NavigationBar from './NavigationBar';
@@ -36,7 +38,7 @@ const AdmissionsPage = () => {
         console.error('Error fetching courses:', error);
       }
     };
-    
+
     fetchCourses();
   }, []);
 
@@ -83,7 +85,7 @@ const AdmissionsPage = () => {
   const handleInquirySubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/inquiries', {
+      const response = await fetch('http://localhost:5000/api/inquiries', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +114,6 @@ const AdmissionsPage = () => {
     <div>
       <NavigationBar />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-6 py-12">
-        
         {/* Introduction */}
         <section className="mb-16 text-center max-w-3xl mx-auto">
           <h1 className="text-6xl font-extrabold mb-4 text-gray-200">Welcome to Talent Engaged Academy</h1>
@@ -156,7 +157,7 @@ const AdmissionsPage = () => {
         {/* Admission Process */}
         <section className="mb-16 py-12 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white text-center">
           <h2 className="text-6xl font-extrabold mb-12 text-blue-400">Admission Process</h2>
-          
+
           {/* Steps */}
           <div className="flex flex-col md:flex-row justify-center items-center space-y-12 md:space-y-0 md:space-x-8">
             {/* Step 1 */}
@@ -175,7 +176,7 @@ const AdmissionsPage = () => {
                 Start Application
               </a>
             </div>
-            
+
             {/* Step 2 */}
             <div className="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 max-w-sm w-full">
               <div className="mb-6">
@@ -192,7 +193,7 @@ const AdmissionsPage = () => {
                 Learn More
               </a>
             </div>
-            
+
             {/* Step 3 */}
             <div className="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 max-w-sm w-full">
               <div className="mb-6">
@@ -209,7 +210,7 @@ const AdmissionsPage = () => {
                 Prepare for Interview
               </a>
             </div>
-            
+
             {/* Step 4 */}
             <div className="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300 max-w-sm w-full">
               <div className="mb-6">
@@ -231,11 +232,11 @@ const AdmissionsPage = () => {
 
         {/* Inquiry Form */}
         <section className="mb-16">
-        <h2 className="text-5xl font-bold mb-8 text-center text-blue-400">Course Inquiry Form</h2>
-  <p className="text-lg text-gray-300 text-center mb-12">Please fill out the form below to inquire about a course, and we will get back to you with more information.</p>
-  
+          <h2 className="text-5xl font-bold mb-8 text-center text-blue-400">Course Inquiry Form</h2>
+          <p className="text-lg text-gray-300 text-center mb-12">Please fill out the form below to inquire about a course, and we will get back to you with more information.</p>
+
           <form onSubmit={handleInquirySubmit} className="bg-gray-800 p-8 rounded-lg text-black shadow-lg max-w-3xl mx-auto">
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 type="text"

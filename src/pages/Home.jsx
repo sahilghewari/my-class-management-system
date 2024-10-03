@@ -5,8 +5,6 @@ import NavigationBar from './NavigationBar';
 import Footer from './Footer';
 import axios from 'axios';
 
-// Import your images
-import logo from '../assets/images/logo.svg';
 import heroImage from '../assets/images/hero.jpg';
 import feature1 from '../assets/images/feature1.jpg'; 
 import feature2 from '../assets/images/feature2.jpg'; 
@@ -15,11 +13,11 @@ import feature3 from '../assets/images/feature3.jpg';
 const Home = () => {
   const [currentFeature, setCurrentFeature] = useState(0); 
   const [notifications, setNotifications] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Authentication state
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Replace with your actual token retrieval method
+    const token = localStorage.getItem('token'); 
     setIsAuthenticated(!!token);
 
     const fetchNotifications = async () => {
@@ -55,22 +53,13 @@ const Home = () => {
     },
   ];
 
-  // Sample notifications - this should be replaced with a fetch from your backend
-  useEffect(() => {
-    const sampleNotifications = [
-      { id: 1, message: 'New course added: Introduction to AI!', timestamp: '2024-09-28' },
-      { id: 2, message: 'Webinar on Education Technology next week.', timestamp: '2024-09-27' },
-      { id: 3, message: 'Remember to submit your assignments by Friday!', timestamp: '2024-09-26' },
-    ];
-    setNotifications(sampleNotifications);
-  }, []);
-
+ 
   const handleAIButtonClick = () => {
     if (isAuthenticated) {
-      navigate('/ai-page'); // Redirect to AI page
+      navigate('/ai-page');
     } else {
       alert("Please login To use AI")
-      navigate('/login'); // Redirect to login page if not authenticated
+      navigate('/login'); 
     }
   };
 
@@ -104,7 +93,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sci-Fi Futuristic AI Button */}
+      {/*  AI Button */}
       <section className="px-8 py-1 flex justify-center">
         <button 
           onClick={handleAIButtonClick} 
@@ -115,23 +104,34 @@ const Home = () => {
       </section>
      
       {/* Notifications Section */}
-      <section className="px-8 py-16">
-        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-blue-400 bg-clip-text text-transparent neon-glow">
-          Notifications
-        </h2>
-        <div className="bg-gray-800 p-4 rounded-lg shadow-lg border-2 border-purple-500 neon-border transition-transform transform hover:scale-105">
-          {notifications.length > 0 ? (
-            notifications.map(notification => (
-              <div key={notification.id} className="border-b border-gray-700 py-2 hover:bg-gray-700 transition-colors duration-300">
-                <p className="text-sm">{notification.message}</p>
-                <p className="text-xs text-gray-400">{notification.timestamp}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-sm">No notifications available.</p>
-          )}
-        </div>
-      </section>
+      <section className="relative px-8 py-16 overflow-hidden">
+  <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-blue-400 bg-clip-text text-transparent neon-glow text-center">
+    Latest News
+  </h2>
+  
+  {/* Animated Background */}
+  <div className="absolute inset-0 bg-[url('/path-to-your-animation.gif')] bg-cover bg-center opacity-20" />
+
+  {/* 3D Sci-Fi Card */}
+  <div className="relative z-10 bg-gray-900 p-6 rounded-lg shadow-lg border-2 border-purple-500 neon-border transition-transform transform hover:scale-105 backdrop-blur-lg">
+    <div className="flex flex-col space-y-4">
+      {notifications.length > 0 ? (
+        notifications.map(notification => (
+          <div
+            key={notification.id}
+            className="flex justify-between items-center bg-gray-800 bg-opacity-70 rounded-lg p-4 shadow-lg transform transition-transform hover:scale-105"
+          >
+            <p className="text-sm text-gray-200">{notification.message}</p>
+            <div className="h-3 w-3 bg-blue-500 rounded-full"></div> {/* Optional indicator bubble */}
+          </div>
+        ))
+      ) : (
+        <p className="text-sm text-gray-300">No notifications available.</p>
+      )}
+    </div>
+  </div>
+  
+</section>
 
       {/* Features Section */}
       <section className="px-8 py-16">

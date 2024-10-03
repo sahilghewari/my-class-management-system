@@ -39,9 +39,27 @@
   }
 }
 
-/* Applying the animation to notifications */
-.notification-item {
-  animation: pulse 1.5s infinite;
+
+
+
+
+.neon-border {
+  box-shadow: 0 0 5px rgba(128, 0, 255, 0.8), 0 0 10px rgba(128, 0, 255, 0.6), 0 0 20px rgba(128, 0, 255, 0.4);
 }
 
-  
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.notification-bubble {
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}

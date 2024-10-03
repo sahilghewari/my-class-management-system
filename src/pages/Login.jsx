@@ -20,22 +20,22 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setError(null); // Reset error state
+    e.preventDefault(); 
+    setError(null); 
 
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {
-        email, // Send email
-        password, // Send password
+        email, 
+        password, 
       });
 
       if (response.data.success) {
-        localStorage.setItem('user', JSON.stringify(response.data.user)); // Store user details
-        localStorage.setItem('token', response.data.token); // Store user token from response
-        localStorage.setItem('isAuthenticated', 'true'); // Set authenticated flag
-        navigate('/'); // Redirect to home page
+        localStorage.setItem('user', JSON.stringify(response.data.user)); 
+        localStorage.setItem('token', response.data.token); 
+        localStorage.setItem('isAuthenticated', 'true');
+        navigate('/'); 
       } else {
-        setError(response.data.message); // Set error message from response
+        setError(response.data.message); 
       }
     } catch (error) {
       if (error.response && error.response.data) {

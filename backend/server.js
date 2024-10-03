@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courses'); // Adjust the path as necessary
 const notificationRoutes = require('./routes/Notifications');
 const bodyParser = require('body-parser');
+const inquiriesRoute = require('./routes/inquiries');
 
 
 dotenv.config();  // Load environment variables
@@ -36,6 +37,7 @@ connectDB();
 app.use('/api/auth', authRoutes);  // Register auth routes
 app.use('/api/courses', courseRoutes); // Add this line to use your routes
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/inquiries', inquiriesRoute);
 
 
 // Start Server

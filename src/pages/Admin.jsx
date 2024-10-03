@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaChartBar, FaUserCog, FaBookOpen, FaCalendarAlt, FaEnvelope, FaDollarSign, FaCogs, FaTrash, FaEdit } from 'react-icons/fa';
+import { FaBookOpen, FaEnvelope, FaQuestionCircle } from 'react-icons/fa'; // Added FaQuestionCircle for inquiries
 
 const AdminDashboard = () => {
   const [courses, setCourses] = useState([]);
@@ -8,7 +8,8 @@ const AdminDashboard = () => {
   const [newCourse, setNewCourse] = useState({ title: '', description: '', teacher: '', fees: '' });
   const [newNotification, setNewNotification] = useState({ message: '' }); // Add adminId accordingly
   const [editCourse, setEditCourse] = useState(null); // For editing a course
-  const [editNotification, setEditNotification] = useState(null); // For editing a notification
+  const [inquiries, setInquiries] = useState([]); // To store queries
+
 
   // Fetch Courses from backend
   useEffect(() => {
@@ -42,9 +43,22 @@ const AdminDashboard = () => {
       }
     };
 
-    fetchCourses();
-    fetchNotifications();
-  }, []);
+    
+
+  const fetchInquiries = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/inquiries');
+      setInquiries(response.data);
+    } catch (error) {
+      console.error('Error fetching queries:', error);
+    }
+  };
+
+  fetchCourses();
+  fetchNotifications();
+  fetchInquiries();
+  
+}, []);
 
   // Add a new course
   const addCourse = async () => {
@@ -105,6 +119,34 @@ const AdminDashboard = () => {
     }
   };
 
+  
+  // Export Queries Report as CSV
+  const exportQueriesReport = () => {
+    const csvData = queries.map(query => ({
+      Name: query.name,
+      Email: query.email,
+      Course: query.course,
+      Message: query.message
+    }));
+
+    const headers = ['Name', 'Email', 'Course', 'Message'];
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map(row => [row.Name, row.Email, row.Course, row.Message].join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'queries_report.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
       {/* Sidebar */}
@@ -118,6 +160,11 @@ const AdminDashboard = () => {
           <a href="#notification-management" className="flex items-center space-x-2 hover:text-blue-500 neon-glow">
             <FaEnvelope className="text-xl" />
             <span>Notification Management</span>
+          </a>
+
+          <a href="#inquiries-management" className="flex items-center space-x-2 hover:text-blue-500 neon-glow">
+            <FaQuestionCircle className="text-xl" />
+            <span>Inquiries Management</span>
           </a>
         </nav>
       </aside>
@@ -268,6 +315,36 @@ const AdminDashboard = () => {
                 </button>
               </div>
             ))}
+          </div>
+        </section>
+
+
+         {/* Inquiries Management Section */}
+         <section id="inquiries-management" className="mt-16">
+          <h3 className="text-2xl font-semibold mb-6 neon-text">Inquiries Management</h3>
+
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-6 neon-border">
+            <h4 className="text-xl font-bold mb-4">Inquiries List</h4>
+
+            <div className="space-y-4">
+              {inquiries.map(query => (
+                <div key={query._id} className="bg-gray-700 p-4 rounded-lg flex justify-between items-center neon-glow">
+                  <div>
+                    <p><strong>Name:</strong> {query.name}</p>
+                    <p><strong>Email:</strong> {query.email}</p>
+                    <p><strong>Course:</strong> {query.course}</p>
+                    <p><strong>Message:</strong> {query.message}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <button
+              className="bg-blue-600 py-2 px-4 mt-6 rounded hover:bg-blue-500 transition"
+              onClick={exportQueriesReport}
+            >
+              Export Inquiries as CSV
+            </button>
           </div>
         </section>
       </main>
