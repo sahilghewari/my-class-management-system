@@ -3,20 +3,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // Import your assets
-import logo from '../assets/images/logo.svg'; // Update with your logo path
+import logo from '../assets/images/logo.svg';
 
 const Login = () => {
-  const [email, setEmail] = useState(''); // State for email
-  const [password, setPassword] = useState(''); // State for password
-  const [error, setError] = useState(null); // State for error messages
-  const navigate = useNavigate(); // For navigation
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
+  const [error, setError] = useState(null);
+  const navigate = useNavigate(); 
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value); // Update email state
+    setEmail(e.target.value); 
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value); // Update password state
+    setPassword(e.target.value); 
   };
 
   const handleSubmit = async (e) => {

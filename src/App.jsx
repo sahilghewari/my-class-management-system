@@ -6,7 +6,6 @@ import Ai from './pages/Ai';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Admission from './pages/Admission';
-import Payment from './pages/Payment';
 import Admin from './pages/Admin';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admission" element={<Admission />} />
-        <Route path="/payment" element={<Payment />} />
         <Route path="/admin" element={<Admin />} />
       
       </Routes>

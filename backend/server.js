@@ -3,22 +3,22 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
-const courseRoutes = require('./routes/courses'); // Adjust the path as necessary
+const courseRoutes = require('./routes/courses'); 
 const notificationRoutes = require('./routes/Notifications');
 const bodyParser = require('body-parser');
 const inquiriesRoute = require('./routes/inquiries');
 const nodemailer = require('nodemailer');
-const Inquiries = require('./models/Inquiry'); // Ensure this path is correct
+const Inquiries = require('./models/Inquiry'); 
 
 
-dotenv.config();  // Load environment variables
+dotenv.config();  
 
 const app = express();
 
 
-app.use(cors());  // Enable CORS for frontend-backend communication
-app.use(express.json());  // Parse JSON bodies
-app.use(bodyParser.json()); // for parsing application/json
+app.use(cors()); 
+app.use(express.json());  
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //nodemailer setup
@@ -64,16 +64,16 @@ const connectDB = async () => {
     console.log('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection error:', error);
-    process.exit(1);  // Exit process on failure
+    process.exit(1); 
   }
 };
 
-// Connect to MongoDB before starting the server
+
 connectDB();
 
 // Routes
-app.use('/api/auth', authRoutes);  // Register auth routes
-app.use('/api/courses', courseRoutes); // Add this line to use your routes
+app.use('/api/auth', authRoutes);  
+app.use('/api/courses', courseRoutes); 
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/inquiries', inquiriesRoute);
 

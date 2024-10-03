@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaBookOpen, FaEnvelope, FaQuestionCircle } from 'react-icons/fa'; // Added FaQuestionCircle for inquiries
+import { FaBookOpen, FaEnvelope, FaQuestionCircle } from 'react-icons/fa'; 
 
 const AdminDashboard = () => {
   const [courses, setCourses] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [newCourse, setNewCourse] = useState({ title: '', description: '', teacher: '', fees: '' });
-  const [newNotification, setNewNotification] = useState({ message: '' }); // Add adminId accordingly
-  const [editCourse, setEditCourse] = useState(null); // For editing a course
-  const [inquiries, setInquiries] = useState([]); // To store queries
-  const [responseMessage, setResponseMessage] = useState({ email: '', message: '' }); // For sending email responses
+  const [newNotification, setNewNotification] = useState({ message: '' });
+  const [editCourse, setEditCourse] = useState(null); 
+  const [inquiries, setInquiries] = useState([]); 
+  const [responseMessage, setResponseMessage] = useState({ email: '', message: '' });
 
 
   // Fetch Courses from backend

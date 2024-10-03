@@ -6,14 +6,13 @@ import logo from '../assets/images/logo.svg';
 
 const NavigationBar = () => {
   const navigate = useNavigate();
-  const isAuthenticated = localStorage.getItem('isAuthenticated'); // Check authentication status
+  const isAuthenticated = localStorage.getItem('isAuthenticated'); 
 
   const handleLogout = () => {
-    // Clear user session
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('user');
-    localStorage.removeItem('token'); // Optional: Clear token
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   return (
