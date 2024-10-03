@@ -59,14 +59,11 @@ const StudyMaterialPage = () => {
           </h1>
           <nav>
             <ul className="space-y-6">
-              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => navigate('/ai')}>
+              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => navigate('/ai-page')}>
                 <FaRobot className="text-2xl text-indigo-500" />
                 <span className="text-lg">AI Chat</span>
               </li>
-              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => navigate('/profile')}>
-                <FaUser className="text-2xl text-indigo-500" />
-                <span className="text-lg">Profile</span>
-              </li>
+             
               <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => navigate('/')}>
                 <FaHome className="text-2xl text-indigo-500" />
                 <span className="text-lg">Back to Home</span>

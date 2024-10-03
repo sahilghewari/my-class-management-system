@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [newNotification, setNewNotification] = useState({ message: '' }); // Add adminId accordingly
   const [editCourse, setEditCourse] = useState(null); // For editing a course
   const [inquiries, setInquiries] = useState([]); // To store queries
+  const [responseMessage, setResponseMessage] = useState({ email: '', message: '' }); // For sending email responses
 
 
   // Fetch Courses from backend
@@ -48,6 +49,7 @@ const AdminDashboard = () => {
   const fetchInquiries = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/inquiries');
+      if (Array.isArray(response.data)) 
       setInquiries(response.data);
     } catch (error) {
       console.error('Error fetching queries:', error);
@@ -122,7 +124,7 @@ const AdminDashboard = () => {
   
   // Export Queries Report as CSV
   const exportQueriesReport = () => {
-    const csvData = queries.map(query => ({
+    const csvData = inquiries.map(query => ({
       Name: query.name,
       Email: query.email,
       Course: query.course,
@@ -145,6 +147,17 @@ const AdminDashboard = () => {
     document.body.removeChild(link);
   };
 
+
+  const sendEmailResponse = async (inquiryId) => {
+    try {
+      await axios.post(`http://localhost:5000/api/inquiries/${inquiryId}/send-email`, responseMessage);
+      alert('Email sent successfully!');
+      setResponseMessage({ email: '', message: '' }); // Clear the form
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Error sending email.');
+    }
+  };
   
 
   return (
@@ -321,32 +334,46 @@ const AdminDashboard = () => {
 
          {/* Inquiries Management Section */}
          <section id="inquiries-management" className="mt-16">
-          <h3 className="text-2xl font-semibold mb-6 neon-text">Inquiries Management</h3>
+  <h3 className="text-2xl font-semibold mb-6 neon-text">Inquiries Management</h3>
 
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-6 neon-border">
-            <h4 className="text-xl font-bold mb-4">Inquiries List</h4>
+  <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-6 neon-border">
+    <h4 className="text-xl font-bold mb-4">Inquiries List</h4>
 
-            <div className="space-y-4">
-              {inquiries.map(query => (
-                <div key={query._id} className="bg-gray-700 p-4 rounded-lg flex justify-between items-center neon-glow">
-                  <div>
-                    <p><strong>Name:</strong> {query.name}</p>
-                    <p><strong>Email:</strong> {query.email}</p>
-                    <p><strong>Course:</strong> {query.course}</p>
-                    <p><strong>Message:</strong> {query.message}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
+    <div className="space-y-4">
+      {inquiries.map(inquiry => (
+        <div key={inquiry._id} className="bg-gray-700 p-4 rounded-lg flex justify-between items-center neon-glow">
+          <div className="flex-grow">
+            <p><strong>Name:</strong> {inquiry.name}</p>
+            <p><strong>Email:</strong> {inquiry.email}</p>
+            <p><strong>Course:</strong> {inquiry.course}</p>
+            <p><strong>Message:</strong> {inquiry.message}</p>
+          </div>
+          <div className="flex flex-col w-1/3">
+            <textarea
+              className="w-full mb-2 p-2 bg-gray-600 text-white rounded"
+              placeholder="Type your response here"
+              value={responseMessage.message}
+              onChange={(e) => setResponseMessage({ ...responseMessage, message: e.target.value })}
+            />
             <button
-              className="bg-blue-600 py-2 px-4 mt-6 rounded hover:bg-blue-500 transition"
-              onClick={exportQueriesReport}
+              className="bg-blue-600 py-2 px-4 rounded hover:bg-blue-500 transition"
+              onClick={() => sendEmailResponse(inquiry._id)}
             >
-              Export Inquiries as CSV
+              Send Email
             </button>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+    
+    <button
+      className="bg-blue-600 py-2 px-4 mt-6 rounded hover:bg-blue-500 transition"
+      onClick={exportQueriesReport}
+    >
+      Export Inquiries as CSV
+    </button>
+  </div>
+</section>
       </main>
     </div>
   );

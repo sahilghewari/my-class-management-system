@@ -7,6 +7,8 @@ const courseRoutes = require('./routes/courses'); // Adjust the path as necessar
 const notificationRoutes = require('./routes/Notifications');
 const bodyParser = require('body-parser');
 const inquiriesRoute = require('./routes/inquiries');
+const nodemailer = require('nodemailer');
+const Inquiries = require('./models/Inquiry'); // Ensure this path is correct
 
 
 dotenv.config();  // Load environment variables
@@ -18,6 +20,42 @@ app.use(cors());  // Enable CORS for frontend-backend communication
 app.use(express.json());  // Parse JSON bodies
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//nodemailer setup
+const transporter = nodemailer.createTransport({
+  service: 'gmail', 
+  auth: {
+    user: 'testa2j2@gmail.com', 
+    pass: 'klng gghs lwhf zeyt', 
+  },
+});
+
+
+app.post('/api/inquiries/:inquiryId/send-email', async (req, res) => {
+  const inquiryId = req.params.inquiryId;
+  const { email, message } = req.body;
+
+  try {
+    const inquiry = await Inquiries.findById(inquiryId);
+    if (!inquiry) {
+      return res.status(404).send('Inquiry not found');
+    }
+
+    // Send email
+    await transporter.sendMail({
+      from: 'sahilghewari6@gmail.com',
+      to: inquiry.email,
+      subject: 'Response to your inquiry',
+      text: message,
+    });
+
+    res.send('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send('Error sending email');
+  }
+});
+
 
 // MongoDB Connection
 const connectDB = async () => {
