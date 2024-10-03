@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
 });
 
 // GET /api/inquiries
-router.get('/inquiries', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const inquiries = await Inquiry.find();
 
