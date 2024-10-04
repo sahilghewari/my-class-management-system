@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Admission from './pages/Admission';
 import Admin from './pages/Admin';
+import AdminLogin from './pages/Adminlogin';
+
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/admission" element={<Admission />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
+
       
       </Routes>
     </Router>

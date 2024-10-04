@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+
 const courseRoutes = require('./routes/courses'); 
 const notificationRoutes = require('./routes/Notifications');
 const bodyParser = require('body-parser');
@@ -72,6 +74,8 @@ const connectDB = async () => {
 connectDB();
 
 // Routes
+app.use('/api', adminRoutes);
+
 app.use('/api/auth', authRoutes);  
 app.use('/api/courses', courseRoutes); 
 app.use('/api/notifications', notificationRoutes);
