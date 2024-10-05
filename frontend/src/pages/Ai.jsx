@@ -51,15 +51,15 @@ const StudyMaterialPage = () => {
   };
 
   const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible); // Toggle sidebar visibility
+    setSidebarVisible(!sidebarVisible);
   };
 
   const closeSidebar = () => {
-    setSidebarVisible(false); // Close the sidebar
+    setSidebarVisible(false);
   };
 
   const handleMenuClick = (action) => {
-    closeSidebar(); // Close the sidebar on menu item click
+    closeSidebar(); 
     if (action === 'testimonials') {
       setShowTestimonials(!showTestimonials);
     } else if (action === 'feedback') {

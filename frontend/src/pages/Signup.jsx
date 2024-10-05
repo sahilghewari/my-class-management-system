@@ -69,12 +69,12 @@ const Signup = () => {
       }}
     >
       {/* Container with neon effects and refined borders */}
-      <div className="bg-gray-900 p-10 rounded-lg shadow-lg border-2 border-cyan-400 neon-border max-w-lg w-full transform scale-95 opacity-0 animate-fadeInUp">
-      <div className="flex justify-center mb-6">
-          <img src={logo} alt="Talent Engaged Logo" className="h-14 animate-pulse " />
+      <div className="bg-gray-900 p-6 sm:p-10 rounded-lg shadow-lg border-2 border-cyan-400 neon-border max-w-xs sm:max-w-lg w-full transform scale-95 opacity-0 animate-fadeInUp">
+        <div className="flex justify-center mb-6">
+          <img src={logo} alt="Talent Engaged Logo" className="h-14 animate-pulse" />
         </div>
 
-        <h2 className="text-4xl text-white font-semibold text-center mb-6">
+        <h2 className="text-3xl sm:text-4xl text-white font-semibold text-center mb-6">
           Join Talent Engaged
         </h2>
         <p className="text-gray-400 text-center mb-8">

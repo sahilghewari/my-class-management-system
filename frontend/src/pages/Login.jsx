@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import logo from '../assets/images/logo.svg';
 
@@ -7,8 +7,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-
   const navigate = useNavigate();
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -28,21 +28,20 @@ const Login = () => {
         password,
       });
 
+      console.log("Response:", response.data);
       if (response.data.success) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('isAuthenticated', 'true');
+        navigate('/');
+
         
-        // Check if admin
-        if (response.data.user.role === 'admin') {
-          navigate('/admin'); // Redirect admin to a special dashboard
-        } else {
-          navigate('/'); // Redirect normal user to home
-        }
       } else {
         setError(response.data.message);
       }
     } catch (error) {
+      console.error("Login Error:", error); 
+
       if (error.response && error.response.data) {
         setError(error.response.data.message || 'An error occurred during login. Please try again.');
       } else {
@@ -64,7 +63,7 @@ const Login = () => {
           <img src={logo} alt="Talent Engaged Logo" className="h-12 animate-pulse" />
         </div>
 
-        <h2 className="text-3xl text-white font-bold text-center mb-4">
+        <h2 className="text-3xl md:text-4xl text-white font-bold text-center mb-4">
           Welcome Back!
         </h2>
         <p className="text-gray-400 text-center mb-6">
@@ -111,12 +110,11 @@ const Login = () => {
             Log In
           </button>
      
-        <button
-            
+          <button
             className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold py-3 rounded-md hover:shadow-xl mt-6 hover:scale-105 transform transition-all duration-300 neon-glow"
           >
             <Link to="/adminlogin">
-            ADMIN LogIn
+              ADMIN LogIn
             </Link>
           </button>
         </form>
