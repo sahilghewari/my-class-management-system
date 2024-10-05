@@ -33,15 +33,15 @@ const Blog = () => {
 
   const stats = [
     {
-      value: "35000",
+      value: "3000",
       label: "Happy Students",
     },
     {
-      value: "300",
+      value: "50",
       label: "Expert Faculties",
     },
     {
-      value: "60",
+      value: "25",
       label: "Years of Experience",
     },
   ];
@@ -93,8 +93,8 @@ const Blog = () => {
       <NavigationBar />
 
       {/* Carousel with sci-fi glow effect */}
-      <div className="flex justify-center  bg-[#0b0f19] mt-12 mb-24 p-4">
-        <div className="w-1/2">
+      <div className="flex justify-center bg-[#0b0f19] mt-12 mb-24 p-4">
+        <div className="w-full lg:w-1/2"> {/* Full width on mobile */}
           <Carousel
             className="rounded-xl neon-glow"
             navigation={({ setActiveIndex, activeIndex, length }) => (
@@ -129,10 +129,10 @@ const Blog = () => {
       </div>
 
       {/* Toppers section with sci-fi design */}
-      <h1 className="text-4xl text-white font-bold text-center mb-8">See What Our Toppers Say About Us</h1>
-      <div className="flex items-center justify-center mt-5 gap-9 bg-[#151a2c] p-24 neon-box">
+      <h1 className="text-2xl lg:text-4xl text-white font-bold text-center mb-8">See What Our Toppers Say About Us</h1>
+      <div className="flex flex-wrap justify-center gap-6 lg:gap-9 bg-[#151a2c] p-8 lg:p-24 neon-box">
         {[...Array(3)].map((_, index) => (
-          <Card key={index} className="w-80 bg-[#1f2433] transition-transform hover:scale-105 shadow-neon">
+          <Card key={index} className="w-full lg:w-80 bg-[#1f2433] transition-transform hover:scale-105 shadow-neon">
             <CardHeader className="relative h-56">
               <img
                 src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
@@ -156,33 +156,34 @@ const Blog = () => {
       </div>
 
       {/* Key Features section */}
-      <div className="container mx-auto p-8">
-  <div className="text-center">
-    <h1 className="text-2xl font-bold mb-8 text-white">--- Key Features ---</h1>
-    <div className="flex flex-wrap justify-center gap-x-24 gap-y-12">
-      {keyFeatures.map((feature, index) => (
-        <div 
-          key={index} 
-          className="rounded-xl shadow-lg p-4 h-64 w-60 flex items-center flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-black border border-[#14F195] transition-transform duration-300 hover:scale-105 hover:bg-[#333333] hover:border-[#00FFEA] neon-glow"
-        >
-          <img 
-            className="w-16 h-16 mb-4" 
-            src={feature.icon} 
-            alt="Feature Icon" 
-          />
-          <h2 className="text-lg font-semibold">{feature.title}</h2>
-          <p className="text-center mt-2">{feature.description}</p>
+      <div className="container mx-auto p-4 lg:p-8">
+        <div className="text-center">
+          <h1 className="text-xl lg:text-2xl font-bold mb-8 text-white">--- Key Features ---</h1>
+          <div className="flex flex-wrap justify-center gap-6 lg:gap-x-24 gap-y-8 lg:gap-y-12">
+            {keyFeatures.map((feature, index) => (
+              <div 
+                key={index} 
+                className="rounded-xl shadow-lg p-4 h-64 w-44 lg:w-60 flex items-center flex-col justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-black border border-[#14F195] transition-transform duration-300 hover:scale-105 hover:bg-[#333333] hover:border-[#00FFEA] neon-glow"
+              >
+                <img 
+                  className="w-12 h-12 lg:w-16 lg:h-16 mb-4" 
+                  src={feature.icon} 
+                  alt="Feature Icon" 
+                />
+                <h2 className="text-sm lg:text-lg font-semibold">{feature.title}</h2>
+                <p className="text-center mt-2 text-xs lg:text-sm">{feature.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</div>
+      </div>
+
       {/* Stats section */}
       <div ref={statsRef} className="bg-[#1a1f3a] text-[rgb(211,211,211)] py-8 neon-box">
-        <div className="max-w-7xl mx-auto flex justify-around">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-around text-center">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <h2 className="text-4xl font-bold text-[#D3D3D3]">
+            <div key={index} className="w-full lg:w-auto mb-6 lg:mb-0">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#D3D3D3]">
                 {isVisible ? (
                   <CountUp start={0} end={parseInt(stat.value.replace(/\D/g, ''))} duration={3} />
                 ) : (
@@ -197,16 +198,16 @@ const Blog = () => {
 
       {/* Faculties Section */}
       <div className="bg-[#0b0f19] py-16">
-        <h2 className="text-3xl text-white font-bold text-center mb-8">Our Renowned Faculties</h2>
-        <div className="flex justify-center space-x-12">
+        <h2 className="text-2xl lg:text-3xl text-white font-bold text-center mb-8">Our Renowned Faculties</h2>
+        <div className="flex flex-wrap justify-center gap-8">
           {faculties.map((faculty, index) => (
             <div key={index} className="text-center">
               <img
                 src={faculty.image}
                 alt={faculty.name}
-                className="w-40 h-40 mx-auto rounded-full object-cover neon-glow"
+                className="w-40 lg:w-56 h-40 lg:h-56 object-cover rounded-full shadow-lg border-4 border-cyan-300 transition-transform duration-300 hover:scale-110"
               />
-              <h3 className="mt-4 text-xl font-semibold text-cyan-300">{faculty.name}</h3>
+              <p className="mt-4 text-lg lg:text-xl text-cyan-300 font-bold">{faculty.name}</p>
             </div>
           ))}
         </div>

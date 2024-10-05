@@ -36,8 +36,8 @@ const NavigationBar = () => {
           </button>
         </div>
 
-        {/* Menu Items */}
-        <nav className={`md:flex space-x-4 ${isMenuOpen ? 'block' : 'hidden'} md:block`}>
+        {/* Menu Items - For medium and larger screens */}
+        <nav className="hidden md:flex space-x-4">
           <Link to="/">
             <button className="bg-gradient-to-r from-gray-500 to-gray-700 text-white px-4 py-2 rounded-md hover:from-gray-600 hover:to-gray-800 transition duration-300">
               Menu
@@ -53,7 +53,6 @@ const NavigationBar = () => {
               Blog
             </button>
           </Link>
-          {/* Conditional rendering based on authentication status */}
           {!isAuthenticated ? (
             <Link to="/login">
               <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-md hover:from-blue-600 hover:to-purple-700 transition duration-300">
@@ -70,8 +69,8 @@ const NavigationBar = () => {
           )}
         </nav>
       </header>
-      
-      {/* Dropdown Menu for Mobile */}
+
+      {/* Dropdown Menu for Mobile - Visible when menu is toggled */}
       {isMenuOpen && (
         <div className="md:hidden bg-gray-900 p-4 space-y-2">
           <Link to="/" onClick={toggleMenu}>

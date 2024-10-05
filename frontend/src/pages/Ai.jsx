@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaPaperPlane, FaUser, FaRobot, FaHome, FaQuoteLeft, FaComment } from 'react-icons/fa';
+import { FaPaperPlane, FaUser, FaRobot, FaHome, FaQuoteLeft, FaComment, FaBars, FaTimes } from 'react-icons/fa';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import ReactMarkdown from 'react-markdown';
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +23,7 @@ const StudyMaterialPage = () => {
   const [showTestimonials, setShowTestimonials] = useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [feedback, setFeedback] = useState('');
+  const [sidebarVisible, setSidebarVisible] = useState(false); // State for sidebar visibility
   const navigate = useNavigate();
 
   const generateAINotes = async () => {
@@ -49,41 +50,65 @@ const StudyMaterialPage = () => {
     setShowFeedbackForm(false);
   };
 
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible); // Toggle sidebar visibility
+  };
+
+  const closeSidebar = () => {
+    setSidebarVisible(false); // Close the sidebar
+  };
+
+  const handleMenuClick = (action) => {
+    closeSidebar(); // Close the sidebar on menu item click
+    if (action === 'testimonials') {
+      setShowTestimonials(!showTestimonials);
+    } else if (action === 'feedback') {
+      setShowFeedbackForm(!showFeedbackForm);
+    } else if (action === 'home') {
+      navigate('/');
+    } else if (action === 'ai-page') {
+      navigate('/ai-page');
+    }
+  };
+
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-gray-900 to-white text-white font-poppins">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 to-white text-white font-poppins">
+      {/* Button to Toggle Sidebar */}
+      <button onClick={toggleSidebar} className="lg:hidden p-4 text-indigo-500">
+        <FaBars className="text-2xl" />
+      </button>
+
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 p-6 flex flex-col justify-between border-r-2 border-indigo-500 fixed h-screen rounded-br-xl shadow-lg">
+      <aside className={`lg:w-64 bg-gray-900 p-6 flex flex-col justify-between border-r-2 border-indigo-500 lg:fixed h-screen rounded-br-xl shadow-lg lg:overflow-y-auto ${sidebarVisible ? 'block' : 'hidden lg:block'}`}>
         <div>
           <h1 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
             Talent Engaged
           </h1>
           <nav>
             <ul className="space-y-6">
-              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => navigate('/ai-page')}>
+              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => handleMenuClick('ai-page')}>
                 <FaRobot className="text-2xl text-indigo-500" />
                 <span className="text-lg">AI Chat</span>
               </li>
-             
-              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => navigate('/')}>
+              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => handleMenuClick('home')}>
                 <FaHome className="text-2xl text-indigo-500" />
                 <span className="text-lg">Back to Home</span>
               </li>
-              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => setShowTestimonials(!showTestimonials)}>
+              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => handleMenuClick('testimonials')}>
                 <FaQuoteLeft className="text-2xl text-indigo-500" />
                 <span className="text-lg">User Testimonials</span>
               </li>
-              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => setShowFeedbackForm(!showFeedbackForm)}>
+              <li className="flex items-center space-x-3 hover:text-indigo-400 cursor-pointer" onClick={() => handleMenuClick('feedback')}>
                 <FaComment className="text-2xl text-indigo-500" />
                 <span className="text-lg">Feedback</span>
               </li>
             </ul>
           </nav>
         </div>
-       
       </aside>
 
       {/* Main Content */}
-      <main className="ml-64 flex-1 flex flex-col p-8">
+      <main className="flex-1 flex flex-col p-8 lg:ml-64 lg:pl-6">
         <header className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-semibold">Study Material Generator</h2>
         </header>
@@ -120,7 +145,7 @@ const StudyMaterialPage = () => {
         </div>
 
         {/* Input Section */}
-        <div className="bg-gray-900 p-4 border-t-2 border-indigo-500 flex items-center rounded-xl shadow-lg">
+        <div className="bg-gray-900 p-4 border-t-2 border-indigo-500 flex flex-col lg:flex-row items-center rounded-xl shadow-lg">
           <textarea
             placeholder="Enter your topic here..."
             value={noteInput}
@@ -129,7 +154,7 @@ const StudyMaterialPage = () => {
           />
           <button
             onClick={generateAINotes}
-            className="ml-4 bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-500 neon-glow"
+            className="mt-4 lg:mt-0 lg:ml-4 bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-500 neon-glow"
           >
             <FaPaperPlane className="text-xl" />
           </button>
@@ -139,6 +164,9 @@ const StudyMaterialPage = () => {
         {showTestimonials && (
           <section className="mt-6 p-4 bg-gray-800 rounded-xl shadow-lg">
             <h3 className="text-xl font-semibold mb-4 text-indigo-200">User Testimonials</h3>
+            <button onClick={() => setShowTestimonials(false)} className="absolute top-4 right-4 text-gray-400 hover:text-indigo-300">
+              <FaTimes />
+            </button>
             <blockquote className="text-sm italic text-gray-300">
               "This AI tool has completely transformed my study habits!" - User A
             </blockquote>
@@ -146,7 +174,7 @@ const StudyMaterialPage = () => {
               "The notes generated are accurate and easy to understand." - User B
             </blockquote>
             <blockquote className="text-sm italic text-gray-300 mt-2">
-              "I love the interactive interface; it makes learning fun!" - User C
+              "I love the convenience of generating notes anytime." - User C
             </blockquote>
           </section>
         )}
@@ -154,13 +182,16 @@ const StudyMaterialPage = () => {
         {/* Feedback Form Section */}
         {showFeedbackForm && (
           <section className="mt-6 p-4 bg-gray-800 rounded-xl shadow-lg">
-            <h3 className="text-xl font-semibold mb-4 text-indigo-200">Feedback</h3>
+            <h3 className="text-xl font-semibold mb-4 text-indigo-200">Submit Feedback</h3>
+            <button onClick={() => setShowFeedbackForm(false)} className="absolute top-4 right-4 text-gray-400 hover:text-indigo-300">
+              <FaTimes />
+            </button>
             <form onSubmit={handleFeedbackSubmit}>
               <textarea
                 placeholder="Your feedback..."
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                className="w-full bg-gray-700 text-white p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 h-20"
+                className="w-full h-20 p-2 rounded-xl border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <button
                 type="submit"
