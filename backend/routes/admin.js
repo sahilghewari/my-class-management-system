@@ -64,7 +64,7 @@ router.post('/schedule', verifyAdminToken, async (req, res) => {
   }
 });
 
-router.get('/admin-dashboard', checkAdmin, (req, res) => {
+router.get('/admin', checkAdmin, (req, res) => {
   res.send('Welcome to the Admin Dashboard!');
 });
 

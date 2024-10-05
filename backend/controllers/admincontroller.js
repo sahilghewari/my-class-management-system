@@ -16,24 +16,7 @@ const adminLogin = (req, res) => {
 
   return res.status(401).json({ message: 'Invalid credentials' });
 };
-const updateAdminDetails = (req, res) => {
-    const { email, password } = req.body;
-  
-    // Update admin details
-    if (email) {
-        adminLogin.email = email;
-    }
-  
-    if (password) {
-      // Hash the new password
-      const hashedPassword = bcrypt.hashSync(password, 10);
-      adminLogin.password = hashedPassword;
-    }
-  
-    return res.status(200).json({ message: 'Admin details updated successfully' });
-  };
-  
+
   module.exports = {
     adminLogin,
-    updateAdminDetails,
   };

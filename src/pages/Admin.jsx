@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaBookOpen, FaEnvelope, FaQuestionCircle } from 'react-icons/fa'; 
 import { FaPerson } from 'react-icons/fa6';
+import {  useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 const AdminDashboard = () => {
   const [courses, setCourses] = useState([]);
@@ -13,7 +15,8 @@ const AdminDashboard = () => {
   const [responseMessage, setResponseMessage] = useState({ email: '', message: '' });
   const [adminDetails, setAdminDetails] = useState({ email: '', password: '' });
   const [updateMessage, setUpdateMessage] = useState('');
-  
+  const navigate = useNavigate(); // Initialize navigate
+
   // Update admin details function
   const updateAdminDetails = async () => {
       try {
@@ -25,6 +28,13 @@ const AdminDashboard = () => {
       }
   };
   
+  const handleLogout = () => {
+    // Remove the token from localStorage
+    localStorage.removeItem('token');
+    
+    // Redirect to login page
+    navigate('/adminlogin');
+  };
   
 
   // Fetch Courses from backend
@@ -181,10 +191,7 @@ const AdminDashboard = () => {
       <aside className="w-64 bg-gray-800 h-full fixed top-0 left-0 p-6">
         <h2 className="text-3xl font-bold mb-6 text-blue-400 neon-text">Admin Dashboard</h2>
         <nav className="space-y-4">
-        <a href="#profile-management" className="flex items-center space-x-2 hover:text-blue-500 neon-glow">
-            <FaPerson className="text-xl" />
-            <span>profile Management</span>
-          </a>
+        
           <a href="#course-management" className="flex items-center space-x-2 hover:text-blue-500 neon-glow">
             <FaBookOpen className="text-xl" />
             <span>Course Management</span>
@@ -198,37 +205,16 @@ const AdminDashboard = () => {
             <FaQuestionCircle className="text-xl" />
             <span>Inquiries Management</span>
           </a>
+
+          <button onClick={handleLogout} className="bg-red-500 text-white p-2 rounded-md">
+  Logout
+</button>
         </nav>
       </aside>
 
       {/* Main Content */}
       <main className="ml-64 p-10">
-       <section id='profile-management' className="mb-16">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-6 neon-border">
-        <h4 className="text-xl font-bold mb-4">Update Admin Details</h4>
-        <input
-            type="email"
-            className="w-full p-2 mb-4 rounded bg-gray-700 text-white"
-            placeholder="New Email"
-            value={adminDetails.email}
-            onChange={(e) => setAdminDetails({ ...adminDetails, email: e.target.value })}
-        />
-        <input
-            type="password"
-            className="w-full p-2 mb-4 rounded bg-gray-700 text-white"
-            placeholder="New Password"
-            value={adminDetails.password}
-            onChange={(e) => setAdminDetails({ ...adminDetails, password: e.target.value })}
-        />
-        <button
-            className="bg-blue-600 py-2 px-4 rounded hover:bg-blue-500 transition"
-            onClick={updateAdminDetails}
-        >
-            Update Details
-        </button>
-        {updateMessage && <p className="mt-4 text-green-400">{updateMessage}</p>}
-    </div>
-    </section>
+       
         {/* Course Management Section */}
         <section id="course-management" className="mb-16">
           <h3 className="text-2xl font-semibold mb-6 neon-text">Course Management</h3>
