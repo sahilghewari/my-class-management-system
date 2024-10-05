@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../assets/images/logo.svg';
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,7 +23,7 @@ const Login = () => {
     setError(null);
 
     try {
-      const response = await axios.post('https://my-class-management-system-server.onrender.com/api/auth/login', {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
         password,
       });
@@ -33,6 +33,14 @@ const Login = () => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('isAuthenticated', 'true');
         
+        // Check if admin
+        if (response.data.user.role === 'admin') {
+          navigate('/admin'); // Redirect admin to a special dashboard
+        } else {
+          navigate('/'); // Redirect normal user to home
+        }
+      } else {
+        setError(response.data.message);
       }
     } catch (error) {
       if (error.response && error.response.data) {

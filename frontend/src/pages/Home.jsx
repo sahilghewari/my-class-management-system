@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import {  useNavigate } from 'react-router-dom'; 
 import NavigationBar from './NavigationBar';
 import Footer from './Footer';
 import axios from 'axios';
