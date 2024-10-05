@@ -18,24 +18,20 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors(
-  {
-    origin:[""],
-    methods:["POST","GET"],
-    credentials: true
-  }
-)); 
-
+app.use(cors({
+  origin: 'https://your-frontend-url.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 app.use(express.json());  
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //nodemailer setup
 const transporter = nodemailer.createTransport({
-  service: 'gmail', 
+  service: 'gmail',
   auth: {
-    user: 'testa2j2@gmail.com', 
-    pass: 'klng gghs lwhf zeyt', 
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
