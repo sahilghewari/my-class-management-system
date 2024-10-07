@@ -21,7 +21,7 @@ const Home = () => {
 
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/notifications');
+        const response = await axios.get('https://my-class-management-system-server.onrender.com/api/notifications');
         setNotifications(response.data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
