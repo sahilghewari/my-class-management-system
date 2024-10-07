@@ -23,6 +23,9 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  credentials: true 
 }));
 
 
