@@ -18,11 +18,10 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors({
-  origin: 'http://localhost:5173',  // Specify the frontend origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',  // Allow all necessary HTTP methods
-  credentials: true,  // Allow cookies/auth headers (if applicable)
-}));
+
+
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
 
 app.use(express.json());  
 app.use(bodyParser.json()); 
@@ -81,6 +80,10 @@ const connectDB = async () => {
 
 
 connectDB();
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 // Routes
 app.use('/api', adminRoutes);
