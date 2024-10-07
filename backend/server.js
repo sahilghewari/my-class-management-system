@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const path = require('path');
 
 const courseRoutes = require('./routes/courses'); 
 const notificationRoutes = require('./routes/Notifications');
