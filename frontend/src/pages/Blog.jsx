@@ -18,15 +18,15 @@ import d from '../assets/images/student3.jpg';
 const Blog = () => {
   const faculties = [
     {
-      name: "Sahil Sir",
+      name: "dr.kapil Sharma",
       image: d, 
     },
     {
-      name: "Nigga Sethu",
+      name: "dr.harmeet singh",
       image: p, 
     },
     {
-      name: "Miss.Jagdish Nigga Sethu",
+      name: "dr.arun Sethi",
       image: s, 
     },
   ];
