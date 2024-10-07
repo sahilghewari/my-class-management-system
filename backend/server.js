@@ -15,11 +15,6 @@ const Inquiries = require('./models/Inquiry');
 
 
 dotenv.config();  
-app.use(cors({
-  origin: 'https://my-class-management-system-server.onrender.com', // Allow your frontend's origin
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the methods you want to allow
-  credentials: true // Allow credentials (cookies, authorization headers)
-}));
 
 const app = express();
 
@@ -27,6 +22,11 @@ const app = express();
 
 
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(cors({
+  origin: 'https://my-class-management-system-server.onrender.com', // Allow your frontend's origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the methods you want to allow
+  credentials: true // Allow credentials (cookies, authorization headers)
+}));
 
 
 app.use(express.json());  
