@@ -231,8 +231,8 @@ const AdmissionsPage = () => {
         </section>
 
         {/* Inquiry Form */}
-        <section className="mb-16">
-          <h2 className="text-5xl font-bold mb-8 text-center text-blue-400">Course Inquiry Form</h2>
+        <section className="mb-16" id="enquiry-form">
+          <h2 className="text-5xl font-bold mb-8 text-center text-blue-400">Course Enquiry Form</h2>
           <p className="text-lg text-gray-300 text-center mb-12">Please fill out the form below to inquire about a course, and we will get back to you with more information.</p>
 
           <form onSubmit={handleInquirySubmit} className="bg-gray-800 p-8 rounded-lg text-black shadow-lg max-w-3xl mx-auto">

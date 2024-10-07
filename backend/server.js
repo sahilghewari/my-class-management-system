@@ -4,7 +4,6 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-const path = require('path');
 
 const courseRoutes = require('./routes/courses'); 
 const notificationRoutes = require('./routes/Notifications');
@@ -19,15 +18,11 @@ dotenv.config();
 const app = express();
 
 
-
-
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.use(cors({
-  origin: '*', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  credentials: true 
+  origin: '*',  // Specify the frontend origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',  // Allow all necessary HTTP methods
+  credentials: true,  // Allow cookies/auth headers (if applicable)
 }));
-
 
 app.use(express.json());  
 app.use(bodyParser.json()); 
@@ -86,10 +81,6 @@ const connectDB = async () => {
 
 
 connectDB();
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
 
 // Routes
 app.use('/api', adminRoutes);

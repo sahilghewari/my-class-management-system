@@ -11,22 +11,22 @@ import {
   Button,
 } from "@material-tailwind/react";
 import CountUp from 'react-countup';
-import s from '../assets/images/nigga2.jpeg'; 
-import p from '../assets/images/Nigga.png';
-import d from '../assets/images/student3.jpg';
+import s from '../assets/images/p.jpg'; 
+import p from '../assets/images/q.jpg';
+import d from '../assets/images/r.jpg';
 
 const Blog = () => {
   const faculties = [
     {
-      name: "Sahil Sir",
+      name: "Dr.Arun Sethi",
       image: d, 
     },
     {
-      name: "Nigga Sethu",
+      name: "Dr.Harpreet Singh",
       image: p, 
     },
     {
-      name: "Miss.Jagdish Nigga Sethu",
+      name: "Dr.Aadesh bandekar",
       image: s, 
     },
   ];
