@@ -70,15 +70,12 @@ const Home = () => {
       {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-between px-8 py-16">
         <div className="md:w-1/2 text-left">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4 
-            bg-gradient-to-r from-sky-500 to-blue-400 bg-clip-text text-transparent 
-            transition-transform transform hover:scale-105 relative"
-            style={{ 
-              textShadow: 
-                '2px 2px 2px rgba(255, 255, 255, 0.6), 3px 3px 5px rgba(173, 216, 230, 0.7), 4px 4px 10px rgba(135, 206, 250, 0.7), 0 0 15px rgba(70, 130, 180, 0.6)' 
-            }}>
+        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4 
+            bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent 
+            transition-transform transform hover:scale-105 relative">
             Transforming Education with Talent Engaged
-          </h1>
+        </h1>
+
           <p className="text-lg md:text-xl mb-6">
             Welcome to Talent Engaged: your innovative online classroom platform.
           </p>

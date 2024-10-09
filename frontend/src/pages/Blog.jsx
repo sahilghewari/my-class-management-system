@@ -6,9 +6,8 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Typography,
-  Button,
+  
 } from "@material-tailwind/react";
 import CountUp from 'react-countup';
 import s from '../assets/images/p.jpg'; 
@@ -92,69 +91,85 @@ const Blog = () => {
       {/* Navigation Bar */}
       <NavigationBar />
 
-      {/* Carousel with sci-fi glow effect */}
       <div className="flex justify-center bg-[#0b0f19] mt-12 mb-24 p-4">
-        <div className="w-full lg:w-1/2"> {/* Full width on mobile */}
-          <Carousel
-            className="rounded-xl neon-glow"
-            navigation={({ setActiveIndex, activeIndex, length }) => (
-              <div className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-2">
-                {new Array(length).fill("").map((_, i) => (
-                  <span
-                    key={i}
-                    className={`block h-1 cursor-pointer rounded-2xl transition-all ${activeIndex === i ? "w-8 bg-cyan-400" : "w-4 bg-cyan-600"}`}
-                    onClick={() => setActiveIndex(i)}
-                  />
-                ))}
-              </div>
-            )}
-          >
-            <img
-              src="https://i.postimg.cc/dDMtgtsD/feliphe-schiarolli-hes6n-UC1-MVc-unsplash.jpg"
-              alt="image 1"
-              className="h-full w-full object-cover neon-border"
+  <div className="w-full lg:w-1/2">
+    <Carousel
+      className="rounded-xl neon-glow"
+      navigation={({ setActiveIndex, activeIndex, length }) => (
+        <div className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-2">
+          {new Array(length).fill("").map((_, i) => (
+            <span
+              key={i}
+              className={`block h-1 cursor-pointer rounded-2xl transition-all ${activeIndex === i ? "w-8 bg-cyan-400" : "w-4 bg-cyan-600"}`}
+              onClick={() => setActiveIndex(i)}
             />
-            <img
-              src="https://i.postimg.cc/vmPnk9pB/kenny-eliason-z-FSo6bn-ZJTw-unsplash.jpg"
-              alt="image 2"
-              className="h-full w-full object-cover neon-border"
-            />
-            <img
-              src="https://i.postimg.cc/K8xgYJbj/annie-spratt-Qckxruozj-Rg-unsplash.jpg"
-              alt="image 3"
-              className="h-full w-full object-cover neon-border"
-            />
-          </Carousel>
+          ))}
         </div>
-      </div>
+      )}
+    >
+      <img
+        src="https://i.postimg.cc/dDMtgtsD/feliphe-schiarolli-hes6n-UC1-MVc-unsplash.jpg"
+        alt="image 1"
+        className="w-screen h-64 object-cover neon-border" 
+      />
+      <img
+        src="https://i.postimg.cc/vmPnk9pB/kenny-eliason-z-FSo6bn-ZJTw-unsplash.jpg"
+        alt="image 2"
+        className="w-screen h-64 object-cover neon-border" 
+      />
+      <img
+        src="https://i.postimg.cc/K8xgYJbj/annie-spratt-Qckxruozj-Rg-unsplash.jpg"
+        alt="image 3"
+        className="w-screen h-64 object-cover neon-border" 
+      />
+    </Carousel>
+  </div>
+</div>
+
 
       {/* Toppers section with sci-fi design */}
       <h1 className="text-2xl lg:text-4xl text-white font-bold text-center mb-8">See What Our Toppers Say About Us</h1>
-      <div className="flex flex-wrap justify-center gap-6 lg:gap-9 bg-[#151a2c] p-8 lg:p-24 neon-box">
-        {[...Array(3)].map((_, index) => (
-          <Card key={index} className="w-full lg:w-80 bg-[#1f2433] transition-transform hover:scale-105 shadow-neon">
-            <CardHeader className="relative h-56">
-              <img
-                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                alt="card-image"
-                className="h-full w-full object-cover"
-              />
-            </CardHeader>
-            <CardBody>
-              <Typography variant="h5" className="mb-2 text-cyan-300">
-                UI/UX Review Check
-              </Typography>
-              <Typography className="text-cyan-100">
-                The place is close to Barceloneta Beach and bus stop just 2 min by walk, close to "Naviglio" where you can enjoy the main nightlife in Barcelona.
-              </Typography>
-            </CardBody>
-            <CardFooter className="pt-0">
-              <Button className="neon-button">Read More</Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-
+<div className="flex flex-wrap justify-center gap-6 lg:gap-9 bg-[#151a2c] p-8 lg:p-24 neon-box">
+  {[
+    {
+      name: "Aarav Mehta",
+      grade: "12th",
+      review: "Talent Engaged Classes has completely changed my approach to learning! The interactive sessions and supportive teachers have made it easier for me to grasp complex concepts in mathematics. I am more confident in my abilities now and have topped my class because of the guidance I received here!",
+      imgSrc: "https://i.postimg.cc/y8xMTBPs/a1.jpg"
+    },
+    {
+      name: "Priya Singh",
+      grade: "11th",
+      review: "Joining Talent Engaged Classes was a game-changer for me! The personalized attention from teachers and the innovative curriculum helped me explore my interests in science and technology. I've grown so much academically and personally, and I couldn't have done it without their support!",
+      imgSrc: "https://i.postimg.cc/Xv0gYkXm/a1.jpg"
+    },
+    {
+      name: "Ravi Sharma",
+      grade: "10th",
+      review: "At Talent Engaged Classes, I found a welcoming community that encourages learning and creativity. The project-based learning approach made studying enjoyable, and the friendships I formed with classmates added to the experience. I'm proud to be a part of this amazing institution!",
+      imgSrc: "https://i.postimg.cc/k5cWXr0R/a1.jpg"
+    }
+  ].map((student, index) => (
+    <Card key={index} className="w-full lg:w-80 bg-[#1f2433] transition-transform hover:scale-105 shadow-neon rounded-lg overflow-hidden">
+      <CardHeader className="relative">
+        <img
+          src={student.imgSrc}
+          alt={student.name}
+          className="w-full h-52 object-cover "
+        />
+      </CardHeader>
+      <CardBody className="p-4">
+        <Typography variant="h5" className="mb-2 text-cyan-300 text-center font-semibold">
+          {student.name} - {student.grade}
+        </Typography>
+        <Typography className="text-cyan-100 text-justify">
+          {student.review}
+        </Typography>
+      </CardBody>
+      
+    </Card>
+  ))}
+</div>
       {/* Key Features section */}
       <div className="container mx-auto p-4 lg:p-8">
         <div className="text-center">

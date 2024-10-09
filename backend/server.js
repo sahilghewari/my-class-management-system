@@ -19,9 +19,9 @@ const app = express();
 
 
 app.use(cors({
-  origin: '*',  // Specify the frontend origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',  // Allow all necessary HTTP methods
-  credentials: true,  // Allow cookies/auth headers (if applicable)
+  origin: '*',  
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS', 
+  credentials: true,
 }));
 
 app.use(express.json());  
@@ -71,7 +71,7 @@ app.post('/api/inquiries/:inquiryId/send-email', async (req, res) => {
 // MongoDB Connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGO_URI, );
     console.log('MongoDB connected');
   } catch (error) {
     console.error('MongoDB connection error:', error);

@@ -187,7 +187,7 @@ const AdmissionsPage = () => {
                 After application review, you will receive details for the entrance exam.
               </p>
               <a
-                href="/exam-info"
+                href="https://app.presentations.ai/view/FjUJ5k"
                 className="block w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-md hover:scale-105 transition-transform duration-300 text-center"
               >
                 Learn More
@@ -204,7 +204,7 @@ const AdmissionsPage = () => {
                 After passing the exam, the next step is an interview with our faculty.
               </p>
               <a
-                href="/interview-tips"
+                href="https://app.presentations.ai/view/FjUJ5k"
                 className="block w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-md hover:scale-105 transition-transform duration-300 text-center"
               >
                 Prepare for Interview
@@ -221,7 +221,7 @@ const AdmissionsPage = () => {
                 New students will attend an orientation session to prepare for classes.
               </p>
               <a
-                href="/orientation"
+                href="https://app.presentations.ai/view/FjUJ5k"
                 className="block w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-md hover:scale-105 transition-transform duration-300 text-center"
               >
                 Get Started
